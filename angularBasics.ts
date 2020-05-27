@@ -22,7 +22,7 @@ class Employee implements EmployeeOptions {
     private state: string
     private zipCode: string;
     private occupation: string;
-    private hourlyWage: number;
+    hourlyWage: number;
     private hours: number;
     private certificate: string[] = [];
 
@@ -63,9 +63,9 @@ class Employee implements EmployeeOptions {
     getOccupation(): string {
         return this.occupation;
     }
-    getHourlyWage(): number {
-        return this.hourlyWage;
-    }
+    // getHourlyWage(): number {
+    //     return this.hourlyWage;
+    // }
 
     //Setters
     setFirstName(firstName: string): void {
@@ -89,9 +89,9 @@ class Employee implements EmployeeOptions {
     setOccupation(occupation: string): void {
         this.occupation = occupation;
     }
-    setHourlyWage(hourlyWage: number): void {
-        this.hourlyWage = hourlyWage;
-    }
+    // setHourlyWage(hourlyWage: number): void {
+    //     this.hourlyWage = hourlyWage;
+    // }
 
     //Methods
     fullName(): string {
@@ -110,11 +110,11 @@ class Employee implements EmployeeOptions {
 
 
     //Calculate weekly wage
-    weeklyWage(hours: number): string {
+    weeklyWage(hours: number): any {
         if (hours) {
-            return "Weekly wages: $" + (hours * this.getHourlyWage);
+            return "Weekly wages: $" + (hours * this.hourlyWage);
         } else {
-            return "Weekly wages: $" + 40 * this.getHourlyWage;
+            return "Weekly wages: $" + 40 * this.hourlyWage;
         }
     }
 
@@ -125,7 +125,7 @@ class Employee implements EmployeeOptions {
     }
 
     static createEmployee(emp: EmployeeOptions): Employee {
-        return new Employee("New Employee: " + emp.firstName, emp.lastName);
+        return new Employee(emp.firstName, emp.lastName);
     }
 
 
@@ -137,8 +137,8 @@ var employee2 = new Employee("Daisy", "Blue", 28, "34913498", "NC", "28277", "Pr
 var employee3 = new Employee("Tom", "Jerry", 25, "984923999", "GA", "63728", "Artist", 50, 50);
 
 document.getElementById("emp1").innerHTML = employee1.fullName() + "<br> " + employee1.addCerts("MBA", "CSM");
-document.getElementById("emp2").innerHTML = employee2.fullName() + "<br> " + employee2.location() + employee2.weeklyWage(40);
-document.getElementById("emp3").innerHTML = employee3.displayDetails() + employee3.weeklyWage(50);
+document.getElementById("emp2").innerHTML = employee2.fullName() + "<br> " + employee2.location();
+document.getElementById("emp3").innerHTML = employee3.displayDetails() + "<br>" + employee3.weeklyWage(50);
 
-document.getElementById("intf").innerHTML = Employee.createEmployee({ firstName: "Winnie", lastName: " The Pooh " }).fullName();
+document.getElementById("intf").innerHTML = "using interface, New Employee: " + Employee.createEmployee({ firstName: "Winnie", lastName: " The Pooh " }).fullName();
 
